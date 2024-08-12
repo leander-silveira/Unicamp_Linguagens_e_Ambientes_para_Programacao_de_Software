@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Author.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-tarefa1</a> &gt; <a href="index.source.html" class="el_package">esoft.book.model</a> &gt; <span class="el_source">Author.java</span></div><h1>Author.java</h1><pre class="source lang-java linenums">package esoft.book.model;
+
+/*
+ * Author.java - Data about an author. 
+ * 
+ ************************************************************************
+ *
+ *
+ ************************************************************************/
+import esoft.com.util.Validator;
+import java.util.Date;
+
+/**
+ * &lt;pre&gt;
+ * This is a Java class called &quot;Author&quot; that represents data about an author. It
+ * contains five private fields: &quot;fname&quot;, &quot;mname&quot;, &quot;lname&quot;, &quot;birthdate&quot;, and
+ * &quot;bio&quot;, which respectively represent the author's first name, middle name,
+ * last name, birth date, and biography. These fields are initialized through a
+ * constructor that takes five parameters: fname, mname, lname, birthdate, and
+ * bio.
+ *
+ * The class provides five public getter methods: &quot;getFname()&quot;, &quot;getLname()&quot;,
+ * &quot;getMname()&quot;, &quot;getBirthdate()&quot;, and &quot;getBio()&quot;, which allow external code to
+ * access the values of the private fields.
+ *
+ * This class implements the Serializable interface, which means that objects of
+ * this class can be serialized and deserialized.
+ * &lt;/pre&gt;
+ * &lt;img src=&quot;./doc-files/Author.png&quot; alt=&quot;Author&quot;&gt;
+ */
+public class Author {
+
+    private static final long serialVersionUID = 8882043540800200706L;
+
+    private final String fname;
+    private final String mname;
+    private final String lname;
+    private final Date birthdate;
+    private final String bio;
+
+    // Regex to match names with letters, including accented characters
+    private static final String NAME_REGEX = &quot;^[\\p{L} .'-]+$&quot;;
+    private static final String BIO_REGEX = &quot;^[\\s\\S]{3,}$&quot;; // Regex para validar bio (mínimo 3 caracteres)
+
+    // Define the maximum length for name and bio fields
+    private static final int NAME_MAX_LENGTH = 50;
+    private static final int BIO_MAX_LENGTH = 500;
+
+    /**
+     *
+     * @param fname
+     * @param mname
+     * @param lname
+     * @param birthdate
+     * @param bio
+     */
+    public Author(final String fname, final String mname, final String lname,
+<span class="fc" id="L58">            final Date birthdate, final String bio) {</span>
+<span class="fc" id="L59">        Validator.validateString(fname, &quot;First name&quot;, NAME_REGEX);</span>
+<span class="fc" id="L60">        Validator.validateStringMaxLength(fname, &quot;First name&quot;, NAME_MAX_LENGTH);</span>
+<span class="fc" id="L61">        Validator.validateStringNotEmpty(mname, &quot;Middle name&quot;);</span>
+<span class="fc" id="L62">        Validator.validateStringMaxLength(mname, &quot;First name&quot;, NAME_MAX_LENGTH);</span>
+<span class="fc" id="L63">        Validator.validateStringNotEmpty(lname, &quot;Last name&quot;);</span>
+<span class="fc" id="L64">        Validator.validateStringMaxLength(lname, &quot;First name&quot;, NAME_MAX_LENGTH);</span>
+<span class="fc" id="L65">        Validator.validateNotNull(birthdate, &quot;Birthdate&quot;);</span>
+<span class="fc" id="L66">        Validator.validateString(bio, &quot;Bio&quot;, BIO_REGEX);</span>
+<span class="fc" id="L67">        Validator.validateStringMaxLength(bio, &quot;Bio&quot;, BIO_MAX_LENGTH);</span>
+
+<span class="fc" id="L69">        this.fname = fname;</span>
+<span class="fc" id="L70">        this.mname = mname;</span>
+<span class="fc" id="L71">        this.lname = lname;</span>
+<span class="fc" id="L72">        this.birthdate = birthdate;</span>
+<span class="fc" id="L73">        this.bio = bio;</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public String getFname() {
+<span class="fc" id="L81">        return fname;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getLname() {
+<span class="fc" id="L89">        return lname;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getMname() {
+<span class="fc" id="L97">        return mname;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getBirthdate() {
+<span class="fc" id="L105">        return birthdate;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getBio() {
+<span class="fc" id="L113">        return bio;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L118">        return &quot;Author{&quot; + &quot;fname=&quot; + fname + &quot;, mname=&quot; + mname + &quot;, lname=&quot; + lname + &quot;, birthdate=&quot; + birthdate + &quot;, bio=&quot; + bio + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

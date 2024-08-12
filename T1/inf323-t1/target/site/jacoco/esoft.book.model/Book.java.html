@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Book.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-tarefa1</a> &gt; <a href="index.source.html" class="el_package">esoft.book.model</a> &gt; <span class="el_source">Book.java</span></div><h1>Book.java</h1><pre class="source lang-java linenums">package esoft.book.model;
+
+<span class="nc" id="L3">public class Book {</span>
+
+    // Regex to match ISBN (either ISBN-10 or ISBN-13)
+    private static final String ISBN_REGEX = &quot;(^\\d{9}[\\dX]$)|(^\\\\d{13}$)&quot;;
+    // Regex to match strings with letters, including accented characters, spaces, and ,.&amp;'-
+    private static final String GENERAL_STRING_REGEX = &quot;^[\\p{L} ,.&amp;'-]+$&quot;;
+    // Define the maximum length for various fields
+    private static final int PUBLISHER_MAX_LENGTH = 100;
+    private static final int DESC_MAX_LENGTH = 1000;
+    private static final int THUMBNAIL_MAX_LENGTH = 200;
+    private static final int IMAGE_MAX_LENGTH = 200;
+    private static final int DIMENSIONS_MAX_LENGTH = 50;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
