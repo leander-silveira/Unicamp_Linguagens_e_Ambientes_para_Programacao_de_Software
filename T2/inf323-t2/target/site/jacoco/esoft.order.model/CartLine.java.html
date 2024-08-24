@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartLine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">CartLine.java</span></div><h1>CartLine.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+/* 
+ * CartLine.java - Class stores the necessary data for a single item in
+ *                 a single shopping cart.
+ *
+ ************************************************************************
+ *
+ *
+ ************************************************************************/
+import esoft.abs.model.QtyLine;
+import java.util.Objects;
+import esoft.abs.model.Product;
+
+
+
+/**
+ * &lt;pre&gt;
+ * The CartLine class represents a line item in a shopping cart. 
+ * It has two properties: qty and stock. qty is an integer representing the 
+ * quantity of the item, while stock is an instance of the Product class 
+ * representing the item being added to the cart.
+ *
+ * The constructor of CartLine takes in two parameters: qty and stock. 
+ * qty represents the quantity of the item being added to the cart, while stock 
+ * represents the stock of the item being added to the cart.
+ *
+ * The setQty method allows the quantity of the item in the cart to be updated. 
+ * The getQty method returns the quantity of the item in the cart. 
+ * The getStock method returns the Product object representing the item being 
+ * added to the cart.
+ *
+ * The class implements the Serializable interface, indicating that it can be 
+ * serialized (converted into a byte stream) and deserialized (converted back 
+ * from a byte stream). The serialVersionUID field is used to provide version 
+ * control for serialized instances of the class.
+ * &lt;/pre&gt;
+ * &lt;img src=&quot;./doc-files/CartLine.png&quot; alt=&quot;CartLine&quot;&gt;
+ */
+public class CartLine implements QtyLine {
+
+    private static final long serialVersionUID = 7390646727961714957L;
+
+    private int qty;
+    private final Product stockItem;
+    private double shipment;
+
+    /**
+     *
+     * @param qty
+     * @param stockItem
+     */
+<span class="fc" id="L53">    public CartLine(Product stockItem, int qty) {</span>
+<span class="fc" id="L54">        this.qty = qty;</span>
+<span class="fc" id="L55">        this.stockItem = stockItem;</span>
+<span class="fc" id="L56">    }</span>
+
+    public CartLine(Product stockItem, int qty, double shipment) {
+<span class="nc" id="L59">        this(stockItem, qty);</span>
+<span class="nc" id="L60">        this.shipment = shipment;</span>
+<span class="nc" id="L61">    }</span>
+    
+    
+
+    /**
+     *
+     * @param qty
+     */
+    public void setQty(int qty) {
+<span class="fc" id="L70">        this.qty = qty;</span>
+<span class="fc" id="L71">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int getQty() {
+<span class="fc" id="L79">        return qty;</span>
+    }
+
+    @Override
+    public Product getProduct() {
+<span class="fc" id="L84">        return stockItem;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L89">        int hash = 7;</span>
+<span class="nc" id="L90">        return hash;</span>
+    }
+
+    public double getShipment() {
+<span class="fc" id="L94">        return shipment;</span>
+    }
+
+    public void setShipment(double shipment) {
+<span class="fc" id="L98">        this.shipment = shipment;</span>
+<span class="fc" id="L99">    }</span>
+    
+    
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L106">            return true;</span>
+        }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L109">            return false;</span>
+        }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+<span class="nc" id="L114">        final CartLine other = (CartLine) obj;</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (this.qty != other.qty) {</span>
+<span class="nc" id="L116">            return false;</span>
+        }
+<span class="nc" id="L118">        return Objects.equals(this.stockItem, other.stockItem);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L123">        return &quot;CartLine{&quot; + &quot;qty=&quot; + qty + &quot;, stockItem=&quot; + stockItem + '}';</span>
+    }
+    
+    public double getPrice() {
+<span class="fc" id="L127">        return stockItem.getCost() * qty;</span>
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

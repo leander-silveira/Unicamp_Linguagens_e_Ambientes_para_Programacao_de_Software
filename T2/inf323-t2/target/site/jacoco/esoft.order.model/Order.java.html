@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Order.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">Order.java</span></div><h1>Order.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+
+import esoft.com.model.Address;
+//import esoft.order.Customer;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * A classe Order representa uma ordem de compra, que é criada a partir de um carrinho.
+ * Ela é imutável, exceto pelo atributo 'status', que pode ser alterado.
+ */
+public final class Order {
+
+    private final int id;
+    private final Customer customer;
+    private final Date date;
+    private final Address billingAddress;
+    private final Address shippingAddress;
+    private final List&lt;OrderLine&gt; lines;
+    private final double subtotal;
+    private final double tax;
+    private final double total;
+    private OrderState status;
+
+    /**
+     * Construtor da classe Order.
+     *
+     * @param id                Identificador da ordem.
+     * @param customer          Cliente associado à ordem.
+     * @param date              Data da ordem.
+     * @param billingAddress    Endereço de faturamento.
+     * @param shippingAddress   Endereço de entrega.
+     * @param lines             Linhas da ordem.
+     * @param subtotal          Valor subtotal da ordem.
+     * @param tax               Valor do imposto da ordem.
+     * @param total             Valor total da ordem.
+     * @param status            Estado atual da ordem.
+     */
+    public Order(int id, Customer customer, Date date, Address billingAddress, Address shippingAddress,
+<span class="fc" id="L43">                 List&lt;OrderLine&gt; lines, double subtotal, double tax, double total, OrderState status) {</span>
+
+        // Validações
+<span class="fc" id="L46">        Objects.requireNonNull(customer, &quot;Customer cannot be null&quot;);</span>
+<span class="fc" id="L47">        Objects.requireNonNull(date, &quot;Date cannot be null&quot;);</span>
+<span class="fc" id="L48">        Objects.requireNonNull(billingAddress, &quot;Billing address cannot be null&quot;);</span>
+<span class="fc" id="L49">        Objects.requireNonNull(shippingAddress, &quot;Shipping address cannot be null&quot;);</span>
+<span class="fc" id="L50">        Objects.requireNonNull(lines, &quot;Order lines cannot be null&quot;);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (lines.isEmpty()) {</span>
+<span class="fc" id="L52">            throw new IllegalArgumentException(&quot;Order lines cannot be empty&quot;);</span>
+        }
+<span class="fc bfc" id="L54" title="All 6 branches covered.">        if (subtotal &lt; 0 || tax &lt; 0 || total &lt; 0) {</span>
+<span class="fc" id="L55">            throw new IllegalArgumentException(&quot;Subtotal, tax, and total must be positive values&quot;);</span>
+        }
+
+<span class="fc" id="L58">        this.id = id;</span>
+<span class="fc" id="L59">        this.customer = customer;</span>
+<span class="fc" id="L60">        this.date = new Date(date.getTime()); // Evita modificação externa</span>
+<span class="fc" id="L61">        this.billingAddress = billingAddress;</span>
+<span class="fc" id="L62">        this.shippingAddress = shippingAddress;</span>
+<span class="fc" id="L63">        this.lines = Collections.unmodifiableList(lines); // Lista imutável</span>
+<span class="fc" id="L64">        this.subtotal = subtotal;</span>
+<span class="fc" id="L65">        this.tax = tax;</span>
+<span class="fc" id="L66">        this.total = total;</span>
+<span class="fc" id="L67">        this.status = status; // Status pode ser alterado</span>
+<span class="fc" id="L68">    }</span>
+
+    public int getId() {
+<span class="fc" id="L71">        return id;</span>
+    }
+
+    public Customer getCustomer() {
+<span class="fc" id="L75">        return customer;</span>
+    }
+
+    public Date getDate() {
+<span class="fc" id="L79">        return new Date(date.getTime()); // Retorna uma cópia para imutabilidade</span>
+    }
+
+    public Address getBillingAddress() {
+<span class="fc" id="L83">        return billingAddress;</span>
+    }
+
+    public Address getShippingAddress() {
+<span class="fc" id="L87">        return shippingAddress;</span>
+    }
+
+    public List&lt;OrderLine&gt; getLines() {
+<span class="fc" id="L91">        return lines;</span>
+    }
+
+    public double getSubtotal() {
+<span class="fc" id="L95">        return subtotal;</span>
+    }
+
+    public double getTax() {
+<span class="fc" id="L99">        return tax;</span>
+    }
+
+    public double getTotal() {
+<span class="fc" id="L103">        return total;</span>
+    }
+
+    public OrderState getStatus() {
+<span class="fc" id="L107">        return status;</span>
+    }
+
+    public void setStatus(OrderState status) {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (status == null) {</span>
+<span class="fc" id="L112">            throw new IllegalArgumentException(&quot;Status cannot be null&quot;);</span>
+        }
+<span class="fc" id="L114">        this.status = status;</span>
+<span class="fc" id="L115">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L119">        return &quot;Order{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, customer=&quot; + customer +
+                &quot;, date=&quot; + date +
+                &quot;, billingAddress=&quot; + billingAddress +
+                &quot;, shippingAddress=&quot; + shippingAddress +
+                &quot;, lines=&quot; + lines +
+                &quot;, subtotal=&quot; + subtotal +
+                &quot;, tax=&quot; + tax +
+                &quot;, total=&quot; + total +
+                &quot;, status=&quot; + status +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

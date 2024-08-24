@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cart.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">Cart.java</span></div><h1>Cart.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+/*
+ * Cart.java - Class stores the necessary components of a shopping cart.
+ * 
+ ************************************************************************
+ *
+ *
+ ************************************************************************/
+import esoft.abs.model.ListQtyLine;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import esoft.abs.model.Product;
+
+
+/**
+ * &lt;pre&gt;
+ * This code defines the Cart class, which represents a shopping cart in an
+ * online bookstore. The Cart class has the following attributes:
+ *
+ * id: an integer that represents the unique identifier of the cart.
+ *
+ * time: a Date object that represents the time when the cart was created.
+ *
+ * linesByBookId: a HashMap that maps a book's ID to a CartLine object, which
+ * represents a line in the cart containing a book and the quantity of that
+ * book.
+ *
+ * aggregateCost: a double that represents the total cost of all the books in
+ * the cart.
+ *
+ * aggregateQuantity: an integer that represents the total number of books in
+ * the cart.
+ *
+ * The Cart class has the following methods:
+ *
+ * Cart(int id, Date time): a constructor that initializes the id, time, and
+ * linesByBookId attributes and calls the clear() method to initialize the
+ * aggregateCost and aggregateQuantity attributes.
+ *
+ * getId(): a method that returns the id attribute.
+ *
+ * getTime(): a method that returns the time attribute.
+ *
+ * setTime(Date time): a method that sets the time attribute to the specified
+ * Date.
+ *
+ * clear(): a method that clears the linesByBookId attribute and sets the
+ * aggregateCost and aggregateQuantity attributes to 0.
+ *
+ * getLines(): a method that returns a Collection of all the CartLine objects in
+ * the linesByBookId attribute.
+ *
+ * increaseLine(Book book, int quantity): a method that increases the quantity
+ * of a book in the cart by the specified quantity or adds the book to the cart
+ * if it is not already in it.
+ *
+ * changeLine(Book book, int quantity): a method that changes the quantity of a
+ * book in the cart to the specified quantity.
+ *
+ * subTotal(double discount): a method that calculates the subtotal cost of all
+ * the books in the cart after applying the specified discount.
+ *
+ * tax(double discount): a method that calculates the tax amount on the subtotal
+ * cost of all the books in the cart after applying the specified discount.
+ *
+ * shipCost(): a method that calculates the shipping cost of the cart based on
+ * the total number of books in it.
+ *
+ * total(double discount): a method that calculates the total cost of the cart
+ * after applying the specified discount, tax, and shipping cost.
+ *
+ * &lt;/pre&gt;
+ *
+ * &lt;img src=&quot;./doc-files/Cart.png&quot; alt=&quot;Cart&quot;&gt;
+ */
+public class Cart  implements ListQtyLine&lt;CartLine&gt;{
+
+    private static final long serialVersionUID = -4194553499937996531L;
+
+    private final int id;
+    private Date time;
+    private HashMap&lt;Integer, CartLine&gt; linesByProductId;
+
+<span class="fc" id="L87">    public Cart(int id, Date time) {</span>
+<span class="fc" id="L88">        this.id = id;</span>
+<span class="fc" id="L89">        this.time = time;</span>
+<span class="fc" id="L90">        clear();</span>
+<span class="fc" id="L91">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public int getId() {
+<span class="nc" id="L98">        return id;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getTime() {
+<span class="nc" id="L106">        return time;</span>
+    }
+
+    /**
+     *
+     * @param time
+     */
+    public void setTime(Date time) {
+<span class="nc" id="L114">        this.time = time;</span>
+<span class="nc" id="L115">    }</span>
+
+    /**
+     *
+     *
+     */
+    public void clear() {
+<span class="fc" id="L122">        linesByProductId = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L123">    }</span>
+
+    private double aggregateCost() {
+<span class="fc" id="L126">        return linesByProductId.values().stream().mapToDouble(l -&gt; l.getPrice()).sum();</span>
+    }
+
+    private double aggregateQuantity() {
+<span class="nc" id="L130">        return linesByProductId.values().stream().mapToInt(l -&gt; l.getQty()).sum();</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public List&lt;CartLine&gt; getLines() {
+<span class="fc" id="L139">        return new ArrayList&lt;&gt;(linesByProductId.values());</span>
+    }
+
+    /**
+     *
+     * @param product
+     * @param quantity
+     */
+    public void changeLine(Product product, int quantity) {
+<span class="fc" id="L148">        changeLine(product, quantity, 0.0);</span>
+<span class="fc" id="L149">    }</span>
+
+    public void changeLine(Product product, int quantity, double shipment) {
+<span class="fc" id="L152">        CartLine line = linesByProductId.get(product.getId());</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (line == null) {</span>
+<span class="fc" id="L154">            line = new CartLine(product, 0);</span>
+<span class="fc" id="L155">            linesByProductId.put(product.getId(), line);</span>
+        }
+<span class="fc" id="L157">        line.setQty(quantity);</span>
+<span class="fc" id="L158">        line.setShipment(shipment);</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if (quantity == 0) {</span>
+<span class="fc" id="L160">            linesByProductId.remove(product.getId());</span>
+        }
+<span class="fc" id="L162">    }</span>
+
+
+
+    /**
+     *
+     * The subTotal method calculates the subtotal cost of all the items in the
+     * shopping cart, taking into account the given discount percentage.
+     * &lt;pre&gt;
+     * return aggregateCost * ((100 - discount) * 0.01);
+     * &lt;/pre&gt;
+     *
+     * @param discount
+     * @return
+     */
+    public double subTotal(double discount) {
+<span class="fc" id="L178">        return aggregateCost() * ((100 - discount) * 0.01);</span>
+    }
+
+    /**
+     *
+     * The tax method calculates the sales tax amount based on the subtotal cost
+     * and the given discount percentage. The tax rate is fixed at 8.25%.
+     * &lt;pre&gt;
+     * return subTotal(discount) * 0.0825;
+     * &lt;/pre&gt;
+     *
+     * @param discount
+     * @return
+     */
+    public double tax(double discount) {
+<span class="fc" id="L193">        return subTotal(discount) * 0.0825;</span>
+    }
+
+    public double shipCost() {
+<span class="fc" id="L197">        return linesByProductId.values().stream()</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">                .filter(line -&gt; line.getShipment() != 0.0)</span>
+<span class="pc" id="L199">                .mapToDouble(line -&gt; line.getShipment())</span>
+<span class="fc" id="L200">                .sum();</span>
+    }
+
+    /**
+     *
+     * The total method calculates the total cost of the shopping cart,
+     * including the subtotal, shipping cost, and sales tax, taking into account
+     * the given discount percentage.
+     * &lt;pre&gt;
+     * return subTotal(discount) + shipCost() + tax(discount);
+     * &lt;/pre&gt;
+     *
+     * @param discount
+     * @return
+     */
+    public double total(double discount) {
+<span class="fc" id="L216">        return subTotal(discount) + shipCost() + tax(discount);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L221">        return &quot;Cart{&quot; + &quot;id=&quot; + id + &quot;, time=&quot; + time + &quot;, linesByProductId=&quot; + linesByProductId + &quot;, aggregateCost=&quot; + aggregateCost() + &quot;, aggregateQuantity=&quot; + aggregateQuantity() + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

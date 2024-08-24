@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+inf323-t2,esoft.order.model,OrderLine,35,27,0,0,2,10,2,5,2,5
+inf323-t2,esoft.order.model,Order,57,128,0,10,1,35,1,17,1,12
+inf323-t2,esoft.order.model,CreditCard,0,54,0,0,0,3,0,1,0,1
+inf323-t2,esoft.order.model,OrderState,6,135,0,0,2,15,2,2,2,2
+inf323-t2,esoft.order.model,Cart,59,124,1,5,6,27,8,14,7,12
+inf323-t2,esoft.order.model,CCTransaction,0,51,0,0,0,18,0,9,0,9
+inf323-t2,esoft.order.model,CartLine,61,34,8,0,16,12,8,7,4,7
+inf323-t2,esoft.order.model,Customer,141,237,19,21,23,63,21,22,2,21

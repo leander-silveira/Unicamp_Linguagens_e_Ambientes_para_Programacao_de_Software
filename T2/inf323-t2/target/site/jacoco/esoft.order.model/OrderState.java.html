@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">OrderState.java</span></div><h1>OrderState.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+import esoft.abs.model.State;
+
+
+/**
+ * &lt;img src=&quot;./doc-files/OrderState.png&quot; alt=&quot;OrderState&quot;&gt;
+ * @author 
+ */
+<span class="fc" id="L10">public enum OrderState implements State{</span>
+    
+    
+    // initial
+<span class="fc" id="L14">    NEW(&quot;&quot;,&quot;Order&quot;) ,</span>
+<span class="fc" id="L15">    ALLOCATE_EXCEPTION(&quot;&quot;,&quot;Order&quot;) ,</span>
+<span class="fc" id="L16">    PENDING_ACKNOWLEDGMENT_PAYMENT(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L17">    PAID_OUT(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L18">    PAYMENT_EXCEPTION(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L19">    SHIPPED(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L20">    SHIP_EXCEPTION(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L21">    CANCELLED(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L22">    DELIVERED(&quot;&quot;,&quot;Order&quot;),</span>
+<span class="fc" id="L23">    DELIVERY_EXCEPTION(&quot;&quot;,&quot;Order&quot;);</span>
+
+    
+    private final String info;
+    private final String groupState;
+
+<span class="fc" id="L29">    private OrderState(String info, String groupState) {</span>
+<span class="fc" id="L30">        this.info = info;</span>
+<span class="fc" id="L31">        this.groupState = groupState;</span>
+<span class="fc" id="L32">    }</span>
+
+    @Override
+    public String getInfo() {
+<span class="nc" id="L36">        return info;</span>
+    }
+
+    @Override
+    public String getGroupState() {
+<span class="nc" id="L41">        return groupState;</span>
+    }
+    
+ }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderLine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">OrderLine.java</span></div><h1>OrderLine.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+/*
+ * OrderLine.java - Class contains the data pertinent to a single
+ *                  item in a single order.
+ * 
+ *
+ ************************************************************************/
+import esoft.abs.model.QtyLine;
+import esoft.abs.model.Product;
+
+
+/**
+ * &lt;pre&gt;
+ * This is a Java class called OrderLine that represents a single item in a
+ * single order. It contains the following instance variables:
+ * 
+ * book: a reference to a Book object that represents the book being ordered.
+ * 
+ * qty: an integer that represents the quantity of the book being ordered.
+ * 
+ * discount: a double that represents the discount applied to the book.
+ * 
+ * comments: a string that contains any comments about the order line.
+ * 
+ * The constructor of the class initializes these instance variables with the
+ * values passed as arguments.
+ * 
+ *
+ * The class also contains getter methods for each of the instance variables,
+ * allowing other classes to access and retrieve the information contained in an
+ * OrderLine object.
+ * 
+ * Additionally, the class implements the Serializable interface, which means
+ * that objects of this class can be serialized and deserialized, allowing them
+ * to be stored and retrieved from disk or sent over a network.
+ * &lt;/pre&gt;
+ * 
+ * &lt;img src=&quot;./doc-files/OrderLine.png&quot; alt=&quot;OrderLine&quot;&gt;
+ */
+public class OrderLine  implements QtyLine{
+
+    private static final long serialVersionUID = -5063511252485472431L;
+
+    private final Product stockItem;
+    private final int qty;
+    private final double discount;
+    private final String comments;
+
+    /**
+     *
+     * @param stockItem     
+     * @param qty
+     * @param discount
+     * @param comments
+     */
+<span class="fc" id="L57">    public OrderLine(Product stockItem, int qty, double discount, String comments) {</span>
+<span class="fc" id="L58">        this.stockItem = stockItem;</span>
+<span class="fc" id="L59">        this.qty = qty;</span>
+<span class="fc" id="L60">        this.discount = discount;</span>
+<span class="fc" id="L61">        this.comments = comments;</span>
+<span class="fc" id="L62">    }</span>
+
+    
+
+    /**
+     *
+     * @return
+     */
+    //@Override
+    @Override
+    public int getQty() {
+<span class="fc" id="L73">        return qty;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getDiscount() {
+<span class="fc" id="L81">        return discount;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getComments() {
+<span class="fc" id="L89">        return comments;</span>
+    }
+
+    //@Override
+    @Override
+    public Product getProduct() {
+<span class="fc" id="L95">        return stockItem;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L100">        return &quot;OrderLine{&quot; + &quot;stockItem=&quot; + stockItem + &quot;, qty=&quot; + qty + &quot;, discount=&quot; + discount + &quot;, comments=&quot; + comments + '}';</span>
+    }
+
+   
+    public double getPrice() {
+<span class="nc" id="L105">        return stockItem.getCost() * qty;</span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

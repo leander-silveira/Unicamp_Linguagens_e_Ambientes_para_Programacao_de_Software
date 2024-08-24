@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CCTransaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">inf323-t2</a> &gt; <a href="index.source.html" class="el_package">esoft.order.model</a> &gt; <span class="el_source">CCTransaction.java</span></div><h1>CCTransaction.java</h1><pre class="source lang-java linenums">package esoft.order.model;
+
+/* 
+ * CCTransaction.java - Class holds data for a single credit card
+ *                      transaction.
+ *
+ ************************************************************************
+ *
+ *
+ ************************************************************************/
+import esoft.com.model.Country;
+import java.util.Date;
+
+/**
+ * &lt;pre&gt;
+ * This is the implementation for a class called CCTransaction that holds data
+ * for a single credit card transaction. The class has the following properties:
+ * 
+ * type - a String representing the type of credit card used (e.g. Visa,
+ * Mastercard)
+ * 
+ * num - a long representing the credit card number
+ * 
+ * name - a String representing the name on the credit card
+ * 
+ * expire - a Date representing the expiration date of the credit card
+ * 
+ * authId - a String representing the authorization ID of the transaction
+ * 
+ * amount - a double representing the amount of the transaction
+ * 
+ * date - a Date representing the date of the transaction
+ * 
+ * country - a Country object representing the country where the transaction was
+ * made
+ * 
+ * The class has a constructor that takes in all of the above properties and
+ * initializes the corresponding instance variables. The class also has getters
+ * for each of the properties.
+ * &lt;/pre&gt;
+ * &lt;img src=&quot;./doc-files/CCTransaction.png&quot; alt=&quot;CCTransaction&quot;&gt;
+ */
+public class CCTransaction  {
+
+    private static final long serialVersionUID = 5470177450411822726L;
+
+    private final CreditCard type;
+    private final long num;
+    private final String name;
+    private final Date expire;
+    private final String authId;
+    private final double amount;
+    private final Date date;
+    private final Country country;
+
+    
+    public CCTransaction(CreditCard type, long num, String name, Date expire,
+<span class="fc" id="L58">            String authId, double amount, Date date, Country country) {</span>
+<span class="fc" id="L59">        this.type = type;</span>
+<span class="fc" id="L60">        this.num = num;</span>
+<span class="fc" id="L61">        this.name = name;</span>
+<span class="fc" id="L62">        this.expire = expire;</span>
+<span class="fc" id="L63">        this.authId = authId;</span>
+<span class="fc" id="L64">        this.amount = amount;</span>
+<span class="fc" id="L65">        this.date = date;</span>
+<span class="fc" id="L66">        this.country = country;</span>
+<span class="fc" id="L67">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public CreditCard getType() {
+<span class="fc" id="L74">        return type;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public long getNum() {
+<span class="fc" id="L82">        return num;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+<span class="fc" id="L90">        return name;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getExpire() {
+<span class="fc" id="L98">        return expire;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getAuthId() {
+<span class="fc" id="L106">        return authId;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getAmount() {
+<span class="fc" id="L114">        return amount;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Date getDate() {
+<span class="fc" id="L122">        return date;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Country getCountry() {
+<span class="fc" id="L130">        return country;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

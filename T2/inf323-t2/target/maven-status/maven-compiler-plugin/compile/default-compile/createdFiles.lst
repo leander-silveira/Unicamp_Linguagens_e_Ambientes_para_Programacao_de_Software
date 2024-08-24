@@ -1,0 +1,8 @@
+esoft/order/model/Cart.class
+esoft/order/model/OrderState.class
+esoft/order/model/CreditCard.class
+esoft/order/model/Customer.class
+esoft/order/model/Order.class
+esoft/order/model/OrderLine.class
+esoft/order/model/CCTransaction.class
+esoft/order/model/CartLine.class
